@@ -24,9 +24,19 @@ namespace Rocky.Controllers
             return View(products);
         }
 
+
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product product)
+        {
+            _db.Add(product);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
     }
