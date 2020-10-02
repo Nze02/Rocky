@@ -26,9 +26,21 @@ namespace Rocky.Controllers
         }
 
 
+        //GET - CREATE
         public IActionResult Create()
         {
             return View();
+        }
+
+
+        //POST - CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]  //checks to see that token is valid and security isn't tampered
+        public IActionResult Create(Category obj)
+        {
+            _db.Category.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
