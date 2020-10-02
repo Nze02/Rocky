@@ -16,6 +16,7 @@ namespace Rocky.Controllers
         {
             _db = db;
         }
+
         public IActionResult Index()
         {
             IEnumerable<Product> products = _db.Products;
@@ -23,6 +24,10 @@ namespace Rocky.Controllers
             return View(products);
         }
 
-        //Add Create...............
+        public IActionResult Create()
+        {
+            return View();
+        }
+
     }
 }
