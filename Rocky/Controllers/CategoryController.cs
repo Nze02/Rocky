@@ -67,7 +67,8 @@ namespace Rocky.Controllers
 
 
         //POST - UPDATE
-        public IActionResult Update(Category obj)
+        [HttpPost]
+        public IActionResult Edit(Category obj)
         {
             if (ModelState.IsValid)
             {
@@ -79,5 +80,38 @@ namespace Rocky.Controllers
             return View(obj);
         }
 
+
+        //GET - DELETE
+        public IActionResult Delete(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Category.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+
+        //GET - DELETE
+        [HttpPost]
+        public IActionResult DeletePost(int? Id)
+        {
+            var obj = _db.Category.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Category.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
     }
 }
