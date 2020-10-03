@@ -33,10 +33,16 @@ namespace Rocky.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            _db.Add(product);
-            _db.SaveChanges();
+            if (ModelState.IsValid)
+            {
 
-            return RedirectToAction("Index");
+                _db.Add(product);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(product);
         }
 
     }
