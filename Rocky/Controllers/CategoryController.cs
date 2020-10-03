@@ -47,5 +47,22 @@ namespace Rocky.Controllers
 
             return View(obj);
         }
+
+
+        //GET - EDIT
+        public IActionResult Edit(int? Id)
+        {
+            if(Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Category.Find(Id);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
     }
 }
