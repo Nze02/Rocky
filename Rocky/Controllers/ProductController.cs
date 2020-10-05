@@ -63,5 +63,22 @@ namespace Rocky.Controllers
             return View(product);
         }
 
+
+        //GET - EDIT
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _db.Update(product);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(product);
+        }
+
     }
 }
