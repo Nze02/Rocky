@@ -45,5 +45,23 @@ namespace Rocky.Controllers
             return View(product);
         }
 
+        
+        //GET - EDIT
+        public IActionResult Edit(int? Id)
+        {
+            if(Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            
+            var product = _db.Products.Find(Id);
+            if(product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
     }
 }
