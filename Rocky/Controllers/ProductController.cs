@@ -64,7 +64,7 @@ namespace Rocky.Controllers
         }
 
 
-        //GET - EDIT
+        //POST - EDIT
         [HttpPost]
         public IActionResult Edit(Product product)
         {
@@ -96,6 +96,22 @@ namespace Rocky.Controllers
             }
 
             return View(product);
+        }
+
+
+        //POST - DELETE
+        [HttpPost]
+        public IActionResult DeletePost(int? Id)
+        {
+            var obj = _db.Products.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Products.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
 
